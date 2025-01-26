@@ -114,7 +114,7 @@ pip install -r requirements.txt
 1. **Clone the Repository**:
    ```bash
    git clone https://github.com/dheenarocky/sentiment_feedback_analysis_for_online_reviews
-   cd sentiment_feedback_analysis
+   cd sentiment_feedback_analysis_for_online_reviews
    ```
 
 2. **Set Up the Database**:
