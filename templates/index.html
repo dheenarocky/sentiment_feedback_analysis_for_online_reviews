@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sentiment Analysis and Review Insights</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles1.css') }}">
+    <style>
+        /* General Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("{{ url_for('static', filename='background.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            color: #fff;
+        }
+
+        body::before {
+            content: "";
+            background-image: url("{{ url_for('static', filename='background.jpg') }}");
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            filter: blur(3px);
+            z-index: -1;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            background-color: rgba(0, 0, 0, 0.8);
+            padding: 0.9em;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-bar a {
+            text-decoration: none;
+            color: #fff;
+            margin: 0 1em;
+            font-weight: bold;
+            font-size: 1.2em;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        .nav-bar a:hover {
+            text-decoration: underline;
+            color: #ffcc33;
+        }
+
+        /* Main Content */
+        .container {
+            text-align: center;
+            margin-top: 100px;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        h1, h2 {
+            margin: 0;
+            padding: 0.5em 0;
+            color: #f8f8f8;
+        }
+
+        .form-group {
+            margin: 1em 0;
+        }
+
+        input[type="file"] {
+            display: block;
+            margin: 0.5em auto;
+            font-size: 1.1em;
+        }
+
+        button {
+            background-color: #007BFF;
+            border: none;
+            padding: 0.8em 1.5em;
+            color: white;
+            font-size: 1.1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: #ff6b6b;
+            font-weight: bold;
+        }
+
+        /* Footer */
+        footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 0.9em 0;
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading-message {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-top: 10px;
+            animation: fadeIn 2s infinite;
+        }
+
+        @keyframes fadeIn {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        .marquee {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            margin-top: 20px;
+            border-radius: 5px;
+            color: #f1c40f;
+            font-weight: bold;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .marquee span {
+            display: inline-block;
+            animation: scroll 15s linear infinite;
+        }
+
+        @keyframes scroll {
+            from {
+                transform: translateX(100%);
+            }
+            to {
+                transform: translateX(-100%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <a href="#">Sentiment-Based Feedback Analysis for Improved Customer Insights</a>
+        <div class="nav-links">
+            <a href="#">Home</a>
+            <a href="/about">About</a>
+            <a href="/contact">Contact</a>
+            <a href="{{ url_for('admin_login') }}">Admin Login</a>
+        </div>
+    </div>
+    
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Sentiment-Based Feedback Analysis</h1>
+        <h2>Analyze and gain insights from reviews (Upload .csv files only ⚠️)</h2>
+
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% endif %}
+
+        <form action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showLoadingScreen()">
+            <div class="form-group">
+                <input type="file" name="file" accept=".csv" required>
+            </div>
+            <button type="submit">Upload and Analyze</button>
+        </form>
+    </div>
+
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <p id="loading-message" class="loading-message">Processing... Please wait.</p>
+    </div>
+    <br><br><br><br><br><br><br><br>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Sentiment Analysis and Review Insights. Final Year Project.</p>
+    </footer>
+
+    <script>
+        function showLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const loadingMessage = document.getElementById('loading-message');
+
+            loadingScreen.style.display = 'flex';
+
+            const messages = [
+                "Processing... Please wait.",
+                "Gathering reviews...",
+                "Extracting key information...",
+                "Analyzing sentiment...",
+                "Generating reports...",
+                "Creating plots...",
+                "Sit back and relax...",
+                "Almost there...",
+                "Thank you for your patience!",
+            ];
+
+            let index = 0;
+            setInterval(() => {
+                if (index < messages.length) {
+                    loadingMessage.textContent = messages[index];
+                    index++;
+                }
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

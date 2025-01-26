@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Review Report</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* General Styling */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url("{{ url_for('static', filename='report_background.jpg') }}") no-repeat center center fixed;
+            background-size: cover;
+            color: #ffffff;
+        }
+
+        body::before {
+            content: "";
+            background: rgba(0, 0, 0, 0.85); /* Add a dark overlay */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none; /* Prevents interaction */
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 20px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.6);
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.8em;
+            color: #0e8fff;
+            margin-bottom: 15px;
+        }
+
+        h2 {
+            font-size: 1.8em;
+            color: #008fcc;
+            margin: 20px 0 10px;
+        }
+
+        p {
+            font-size: 1.3em;
+            margin: 10px 0;
+            color: #e5ff00;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: left;
+            margin: 10px 0;
+        }
+
+        ul li {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            margin: 5px 0;
+            border-radius: 10px;
+            font-size: 1.2em;
+            color: #fff;
+        }
+
+        a {
+            text-decoration: none;
+            color: #ffffffaf;
+            font-size: 1.3em;
+            font-weight: bold;
+        }
+
+        a:hover {
+            color: #ff0000e1;
+        }
+
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.6);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+            color: #fff;
+        }
+
+        .stat-card h3 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+            color: #ffd900;
+        }
+
+        img {
+            display: block;
+            margin: 20px auto;
+            max-width: 90%;
+            border: 3px solid rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.6);
+        }
+
+        /* Print Button */
+        .print-button {
+            margin: 10px;
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .print-button:hover {
+            background-color: #0056b3;
+        }
+
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1, h2, .stat-card {
+            animation: fadeIn 1.5s ease-in-out;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Review Report</h1>
+
+        <!-- Statistics -->
+        <div class="stats">
+            <div class="stat-card">
+                <h3>Positive Reviews</h3>
+                <p>{{ report['positive_count'] }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Neutral Reviews</h3>
+                <p>{{ report['neutral_count'] }}</p>
+            </div>
+            <div class="stat-card">
+                <h3>Negative Reviews</h3>
+                <p>{{ report['negative_count'] }}</p>
+            </div>
+        </div>
+
+        <!-- Sample Reviews -->
+        <h2>Sample Positive Reviews</h2>
+        <ul>
+            {% for review in report['sample_positive'] %}
+                <li>{{ review }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Sample Neutral Reviews</h2>
+        <ul>
+            {% for review in report['sample_neutral'] %}
+                <li>{{ review }}</li>
+            {% endfor %}
+        </ul>
+
+        <h2>Sample Negative Reviews</h2>
+        <ul>
+            {% for review in report['sample_negative'] %}
+                <li>{{ review }}</li>
+            {% endfor %}
+        </ul>
+
+        <!-- Insights -->
+        <h2>Additional Insights</h2>
+        <p><strong>Average Sentiment Score:</strong> {{ report['avg_sentiment_score'] }}</p>
+        <h3>Most Common Words (Top 10)</h3>
+        <ul>
+            {% for word, freq in report['most_common_words'] %}
+                <li>{{ word }}: {{ freq }}</li>
+            {% endfor %}
+        </ul>
+        <p><strong>Average Review Length (characters):</strong> {{ report['avg_review_length'] }}</p>
+
+        <!-- Visualizations -->
+        <h2>Visualizations</h2>
+        <h3>Sentiment Distribution (Pie Chart)</h3>
+        <img src="data:image/png;base64,{{ pie_chart }}" alt="Sentiment Distribution Pie Chart">
+
+        <h3>Sentiment Count Distribution (Bar Chart)</h3>
+        <img src="data:image/png;base64,{{ bar_chart }}" alt="Sentiment Count Bar Chart">
+
+        <!-- Print Button -->
+        <button class="print-button" onclick="window.print()">Print Report</button>
+        <br>
+        <a href="/">Back to Home</a>
+    </div>
+</body>
+</html>
