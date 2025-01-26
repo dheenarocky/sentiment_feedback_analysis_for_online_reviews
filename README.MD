@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-**Sentiment-Based Feedback Analysis for Improved Customer Insights** is a machine learning-based application designed to analyze customer reviews. The project aims to classify reviews into positive, neutral, and negative sentiments, providing detailed insights into customer feedback. Additionally, the application includes sentiment analysis and provides visualizations to enhance understanding of customer perceptions.
+**Sentiment-Based Feedback Analysis for Improved Customer Insights** is a machine learning-based application designed to analyze customer reviews. The project aims to classify reviews into positive, neutral, and negative sentiments, recognising the spam reviews, providing detailed insights into customer feedback. Additionally, the application includes sentiment analysis and provides visualizations to enhance understanding of customer perceptions.
 
 ---
 
@@ -68,7 +68,7 @@ sentiment_feedback_analysis/
 
 ## Features
 
-1. **Sentiment Analysis**: Classifies reviews into positive, neutral, and negative categories and identifes the spam kind of reviews.
+1. **Sentiment Analysis**: Classifies reviews into positive, neutral, and negative categories and identifes the spam kind of reviews which helps customers to understand the feedback of the respective dataset they collected. 
 2. **Visualizations**: Provides graphical representation of sentiment distribution (pie and bar charts).
 3. **Interactive Web Interface**:
    - Home page for file uploads.
