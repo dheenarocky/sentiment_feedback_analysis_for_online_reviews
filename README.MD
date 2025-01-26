@@ -72,7 +72,7 @@ sentiment_feedback_analysis/
 
 ## Features
 
-1. **Sentiment Analysis**: Classifies reviews into positive, neutral, and negative categories.
+1. **Sentiment Analysis**: Classifies reviews into positive, neutral, and negative categories and identifes the spam kind of reviews.
 2. **Visualizations**: Provides graphical representation of sentiment distribution (pie and bar charts).
 3. **Interactive Web Interface**:
    - Home page for file uploads.
@@ -113,7 +113,7 @@ pip install -r requirements.txt
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/dheenarocky/sentiment_feedback_analysis.git
+   git clone https://github.com/dheenarocky/sentiment_feedback_analysis_for_online_reviews
    cd sentiment_feedback_analysis
    ```
 
