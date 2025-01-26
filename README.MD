@@ -11,56 +11,61 @@
 ```
 sentiment_feedback_analysis/
 │
-├── __pycache__/                   # Compiled Python files
-│   └── models.cpython-313.pyc
-│
-├── data/                          # Folder for datasets
-│   ├── cleaned_reviews.csv        # Cleaned dataset for training/testing
-│   ├── reviews.csv                # Example uploaded dataset
-│   └── sample_reviews.csv         # Sample dataset
-│
-├── instance/                      # Flask instance folder for database
-│   └── contact_messages.db        # SQLite database for contact messages
-│
-├── models/                        # Folder for ML models and utilities
-│   ├── data_preprocessing.py      # Script for preprocessing review data
-│   ├── label_encoder.pkl          # Pickle file for label encoding
-│   ├── label_encoder.py           # Script for encoding labels
-│   ├── model.py                   # Main script for model training and predictions
-│   ├── random_forest_model.pkl    # Random Forest model file
-│   ├── sentiment_model.pkl        # Sentiment analysis model file
-│   ├── sentiment_model.py         # Script for sentiment analysis
-│   ├── tfidf_vectorizer.pkl       # TF-IDF vectorizer file
-│   └── vectorizer.pkl             # Feature extraction vectorizer
-│
-├── notebooks/                     # Jupyter notebooks for exploratory work
-│   ├── data_analysis.py           # Python script for exploratory data analysis
-│   └── data_exploration.ipynb     # Jupyter notebook for dataset exploration
-│
-├── static/                        # Static assets (CSS, images)
-│   ├── background.jpg             # Background image for webpages
-│   ├── member.jpg                 # Team member image
-│   ├── report_background.jpg      # Background image for reports
-│   ├── styles.css                 # Main stylesheet
-│   └── styles1.css                # Additional stylesheet
-│
-├── templates/                     # HTML templates for the frontend
-│   ├── about.html                 # About page
-│   ├── admin_login.html           # Admin login page
-│   ├── contact.html               # Contact form page
-│   ├── contact_success.html       # Contact form submission success page
-│   ├── index.html                 # Homepage
-│   ├── report.html                # Report page
-│   └── view_messages.html         # Admin view for contact messages
-│
-├── uploads/                       # Folder for uploaded files
-│   ├── reviews.csv                # User-uploaded dataset
-│   └── sample_reviews.csv         # Sample reviews dataset
-│
-├── app.py                         # Main script for running the Flask application
-├── last_report.json               # Stores the most recent report data
-├── README.md                      # Project description and instructions
-└── requirements.txt               # List of required Python libraries
+├── .gitattributes               # Git attributes configuration
+├── app.py                       # Main Flask application script
+├── data/                        # Folder containing datasets
+├── cleaned_reviews.csv
+├── cleaned_reviews1.csv
+├── fraud_spam_reviews.csv
+├── reviews.csv
+├── reviews1.csv
+├── sample_reviews.csv
+├── sample_reviews1.csv
+├── sample_reviews2.csv
+├── X_test.csv
+├── X_train.csv
+├── y_test.csv
+└── y_train.csv
+├── instance/                    # Flask instance folder (e.g., for config or uploads)
+├── models/                      # Folder containing models and scripts
+│   ├── data_preprocessing.py    # Script for preprocessing data
+│   ├── fraud_detection_model.pkl  # Trained fraud detection model
+│   ├── fraud_tfidf_vectorizer.pkl # TF-IDF vectorizer for fraud detection
+│   ├── generateds.py            # Script to generate synthetic spam reviews
+│   ├── label_encoder.pkl        # Saved label encoder for categorization
+│   ├── label_encoder.py         # Script for label encoding
+│   ├── model.py                 # Script for training models
+│   ├── random_forest_model.pkl  # Saved Random Forest model
+│   ├── sentiment_model.pkl      # Saved sentiment analysis model
+│   ├── sentiment_model.py       # Script for sentiment analysis
+│   ├── tfidf_vectorizer.pkl     # Saved TF-IDF vectorizer for reviews
+│   └── vectorizer.pkl           # General saved vectorizer
+├── models.py                    # Script for model-related logic
+├── notebooks/                   # Folder for exploratory notebooks and scripts
+│   ├── data_analysis.py         # Python script for data analysis
+│   └── data_exploration.ipynb   # Jupyter notebook for exploring datasets
+├── README.md                    # Detailed project documentation
+├── requirements.txt             # Required Python dependencies
+├── requirements(v).txt          # Alternate dependency file
+├── static/                      # Folder for static files (CSS, images, etc.)
+│   ├── background.jpg           # Background image for the web app
+│   ├── member.jpg               # Team member image (if any)
+│   ├── report_background.jpg    # Background for reports
+│   ├── styles.css               # Main stylesheet
+│   └── styles1.css              # Alternate stylesheet
+├── templates/                   # Folder containing HTML templates
+│   ├── about.html               # About page
+│   ├── admin_login.html         # Admin login page
+│   ├── classification_result.html  # Results page after analysis
+│   ├── contact.html             # Contact form page
+│   ├── contact_success.html     # Contact success page
+│   ├── index.html               # Main landing page
+│   ├── report.html              # Report view page
+│   └── view_messages.html       # Admin view for messages
+├── uploads/                     # Folder to store uploaded files
+│   ├── reviews.csv
+│   └── sample_reviews.csv
+└── last_report.json             # JSON file for storing the latest report data
 ```
 
 ---
