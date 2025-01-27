@@ -1,5 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime
+import pytz
 
 db = SQLAlchemy()
 
@@ -12,3 +13,7 @@ class ContactMessage(db.Model):
 
     def __repr__(self):
         return f"<ContactMessage {self.name}>"
+
+    def get_timestamp_ny(self):
+         sydney = pytz.timezone('Australia/Sydney')
+         return self.timestamp.astimezone(sydney).strftime('%Y-%m-%d %H:%M:%S')

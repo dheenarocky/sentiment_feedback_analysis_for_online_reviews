@@ -3,7 +3,7 @@ from matplotlib import pyplot as plt
 from wordcloud import WordCloud
 import pandas as pd
 import os
-from models import db
+from models import db, ContactMessage
 import joblib
 from textblob import TextBlob
 import pytz
@@ -21,15 +21,6 @@ db.init_app(app)  # Initialize `db` with the Flask app
 # Create the database tables (only once during setup)
 with app.app_context():
     db.create_all()
-
-class ContactMessage(db.Model):
-    __tablename__ = 'contact_message'
-    __table_args__ = {'extend_existing': True}
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100), nullable=False)
-    email = db.Column(db.String(100), nullable=False)
-    message = db.Column(db.Text, nullable=False)
-    timestamp = db.Column(db.DateTime, default=db.func.current_timestamp())
 
 # Configuration for file uploads
 UPLOAD_FOLDER = 'uploads'
@@ -213,10 +204,10 @@ def view_messages():
         flash('You need to login first!☹️', 'error')
         return redirect(url_for('admin_login'))
     messages = ContactMessage.query.all()
-    ist = pytz.timezone('Asia/Kolkata')
     for message in messages:
-        message.timestamp = message.timestamp.astimezone(ist)
+        message.timestamp_ist = message.get_timestamp_ny()
     return render_template('view_messages.html', messages=messages)
+
 
 @app.route('/delete_message/<int:message_id>', methods=['POST'])
 def delete_message(message_id):
