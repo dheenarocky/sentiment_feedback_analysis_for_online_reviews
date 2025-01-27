@@ -55,7 +55,7 @@ sentiment_feedback_analysis/
 │   ├── index.html               # Main landing page
 │   ├── report.html              # Report view page
 │   └── view_messages.html       # Admin view for messages
-├── uploads/                     # Folder to store uploaded files
+├── sample_datasets/                     # Folder to store uploaded files
 │   ├── cleaned_reviews1.csv
 │   ├── fraud_sample_reviews.csv
 │   ├── reviews1.csv
