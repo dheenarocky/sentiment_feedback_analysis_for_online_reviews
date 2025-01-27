@@ -205,7 +205,7 @@ def view_messages():
         return redirect(url_for('admin_login'))
     messages = ContactMessage.query.all()
     for message in messages:
-        message.timestamp_ist = message.get_timestamp_ny()
+        message.timestamp_ist = message.get_timestamp_ist()
     return render_template('view_messages.html', messages=messages)
 
 
