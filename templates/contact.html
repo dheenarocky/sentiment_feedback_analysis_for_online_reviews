@@ -61,6 +61,17 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
         }
 
+        .content {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: transform 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+
+        .content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
         h1 {
             text-align: center;
             margin-bottom: 25px;
@@ -152,6 +163,7 @@
         </div>
     </div>
     <div class="container">
+        <div class="content">
         <h1>Contact Us</h1>
         <form action="/contact" method="POST">
             <label for="name">Your Name</label>
@@ -170,5 +182,24 @@
             <p>&copy; <span>2025</span> Sentiment Analysis and Review Insights. Final Year Project</p>
         </footer>
     </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const content = document.querySelector('.content');
+
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            observer.observe(content);
+        });
+    </script>
 </body>
 </html>
