@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -70,7 +71,8 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             margin: 0;
             padding: 0.5em 0;
             color: #f8f8f8;
@@ -144,8 +146,13 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
         }
 
         .loading-message {
@@ -157,8 +164,15 @@
         }
 
         @keyframes fadeIn {
-            0%, 100% { opacity: 0.6; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         .marquee {
@@ -183,12 +197,14 @@
             from {
                 transform: translateX(100%);
             }
+
             to {
                 transform: translateX(-100%);
             }
         }
     </style>
 </head>
+
 <body>
     <!-- Navigation Bar -->
     <div class="nav-bar">
@@ -200,14 +216,14 @@
             <a href="{{ url_for('admin_login') }}">Admin Login</a>
         </div>
     </div>
-    
+
     <!-- Main Content -->
     <div class="container">
         <h1>Sentiment-Based Feedback Analysis</h1>
         <h2>Analyze and gain insights from reviews (Upload .csv files only ⚠️)</h2>
 
         {% if error %}
-            <p class="error">{{ error }}</p>
+        <p class="error">{{ error }}</p>
         {% endif %}
 
         <form action="/upload" method="POST" enctype="multipart/form-data" onsubmit="showLoadingScreen()">
@@ -259,4 +275,5 @@
         }
     </script>
 </body>
+
 </html>

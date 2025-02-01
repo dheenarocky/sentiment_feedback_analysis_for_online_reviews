@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +19,8 @@
 
         body::before {
             content: "";
-            background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            background: rgba(0, 0, 0, 0.7);
+            /* Dark overlay */
             position: fixed;
             top: 0;
             left: 0;
@@ -138,6 +140,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="nav-bar">
         <a href="#">Sentiment-Based Feedback Analysis for Improved Customer Insights</a>
@@ -151,47 +154,48 @@
 
     <div class="login-container">
         <div class="content">
-        <h1>Admin Login</h1>
-        <!-- Flash Messages -->
-        {% with messages = get_flashed_messages(with_categories=true) %}
-        {% if messages %}
-        <ul>
-            {% for category, message in messages %}
-            <li class="message">{{ message }}</li>
-            {% endfor %}
-        </ul>
-        {% endif %}
-        {% endwith %}
-        <!-- Login Form -->
-        <form method="POST">
-            <input type="text" name="username" placeholder="Enter Admin Username" required>
-            <input type="password" name="password" placeholder="Enter Admin Password" required>
-            <button type="submit">Login</button>
-        </form>
-        <!-- Back to Home Link -->
-        <a href="{{ url_for('index') }}" class="btn-back">Back to Home</a>
-        <footer>
-            <p>&copy; <span>2025</span> Sentiment Analysis and Review Insights. Final Year Project</p>
-        </footer>
+            <h1>Admin Login</h1>
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            <ul>
+                {% for category, message in messages %}
+                <li class="message">{{ message }}</li>
+                {% endfor %}
+            </ul>
+            {% endif %}
+            {% endwith %}
+            <!-- Login Form -->
+            <form method="POST">
+                <input type="text" name="username" placeholder="Enter Admin Username" required>
+                <input type="password" name="password" placeholder="Enter Admin Password" required>
+                <button type="submit">Login</button>
+            </form>
+            <!-- Back to Home Link -->
+            <a href="{{ url_for('index') }}" class="btn-back">Back to Home</a>
+            <footer>
+                <p>&copy; <span>2025</span> Sentiment Analysis and Review Insights. Final Year Project</p>
+            </footer>
+        </div>
     </div>
-</div>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const content = document.querySelector('.content');
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const content = document.querySelector('.content');
 
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1
             });
-        }, {
-            threshold: 0.1
-        });
 
-        observer.observe(content);
-    });
-</script>
+            observer.observe(content);
+        });
+    </script>
 </body>
+
 </html>

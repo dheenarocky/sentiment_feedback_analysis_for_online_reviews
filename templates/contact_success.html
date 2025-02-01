@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,7 +20,8 @@
 
         body::before {
             content: "";
-            background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            background: rgba(0, 0, 0, 0.7);
+            /* Dark overlay */
             position: fixed;
             top: 0;
             left: 0;
@@ -88,19 +90,21 @@
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="content">
-        <h1>Thank You!😊</h1>
-        <p>Your message has been successfully submitted. We appreciate your feedback and will get back to you shortly.</p>
-        <a href="/" class="home-button">Return to Home</a>
-        <footer>
-            <p>&copy; <span>2025</span> Sentiment Analysis and Review Insights. Final Year Project</p>
-        </footer>
-    </div>
+            <h1>Thank You!😊</h1>
+            <p>Your message has been successfully submitted. We appreciate your feedback and will get back to you
+                shortly.</p>
+            <a href="/" class="home-button">Return to Home</a>
+            <footer>
+                <p>&copy; <span>2025</span> Sentiment Analysis and Review Insights. Final Year Project</p>
+            </footer>
+        </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const content = document.querySelector('.content');
 
             const observer = new IntersectionObserver(entries => {
@@ -118,4 +122,5 @@
         });
     </script>
 </body>
+
 </html>

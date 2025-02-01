@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,7 +19,8 @@
 
         body::before {
             content: "";
-            background: rgba(0, 0, 0, 0.7); /* Dark overlay */
+            background: rgba(0, 0, 0, 0.7);
+            /* Dark overlay */
             position: fixed;
             top: 0;
             left: 0;
@@ -92,7 +94,8 @@
             color: #ffd700;
         }
 
-        input, textarea {
+        input,
+        textarea {
             padding: 12px;
             border: none;
             border-radius: 5px;
@@ -101,7 +104,8 @@
             background-color: #f9f9f9;
         }
 
-        input:focus, textarea:focus {
+        input:focus,
+        textarea:focus {
             outline: none;
             box-shadow: 0 0 8px rgba(255, 215, 0, 0.8);
         }
@@ -152,6 +156,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="nav-bar">
         <a href="#">Sentiment-Based Feedback Analysis for Improved Customer Insights</a>
@@ -164,27 +169,27 @@
     </div>
     <div class="container">
         <div class="content">
-        <h1>Contact Us</h1>
-        <form action="/contact" method="POST">
-            <label for="name">Your Name</label>
-            <input type="text" id="name" name="name" placeholder="Enter your name" required>
+            <h1>Contact Us</h1>
+            <form action="/contact" method="POST">
+                <label for="name">Your Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" required>
 
-            <label for="email">Your Email</label>
-            <input type="email" id="email" name="email" placeholder="Enter your email" required>
+                <label for="email">Your Email</label>
+                <input type="email" id="email" name="email" placeholder="Enter your email" required>
 
-            <label for="message">Your Message</label>
-            <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
+                <label for="message">Your Message</label>
+                <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
 
-            <button type="submit">Send Message</button>
-        </form>
-        <a href="{{ url_for('index') }}" class="back-link">Back to Home</a>
-        <footer>
-            <p>&copy; <span>2025</span> Sentiment Analysis and Review Insights. Final Year Project</p>
-        </footer>
-    </div>
+                <button type="submit">Send Message</button>
+            </form>
+            <a href="{{ url_for('index') }}" class="back-link">Back to Home</a>
+            <footer>
+                <p>&copy; <span>2025</span> Sentiment Analysis and Review Insights. Final Year Project</p>
+            </footer>
+        </div>
     </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const content = document.querySelector('.content');
 
             const observer = new IntersectionObserver(entries => {
@@ -202,4 +207,5 @@
         });
     </script>
 </body>
+
 </html>

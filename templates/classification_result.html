@@ -1,4 +1,5 @@
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,14 +29,16 @@
             transform: translateY(20px);
             animation: fadeInUp 1.5s forwards;
         }
+
         @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
 
-        h1, h2 {
+        h1,
+        h2 {
             color: #f8f8f8;
             margin-bottom: 20px;
         }
@@ -90,12 +93,13 @@
         .card:hover {
             transform: translateY(-10px);
         }
+
         @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
-    }
 
         .positive {
             background: rgba(46, 204, 113, 0.8);
@@ -124,50 +128,54 @@
         .back-btn:hover {
             background-color: #2c81ba;
         }
+
         .download-container {
-        margin-top: 30px;
-        text-align: center;
-    }
-    .common-words {
-    margin-top: 20px;
-    background: rgba(255, 255, 255, 0.1);
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-}
+            margin-top: 30px;
+            text-align: center;
+        }
 
-    .common-words table {
-        width: 100%;
-        margin: 0 auto;
-        border-collapse: collapse;
-        color: #fff;
-    }
+        .common-words {
+            margin-top: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
 
-    .common-words th, .common-words td {
-        padding: 10px;
-       text-align: left;
-       border-bottom: 1px solid #ddd;
-    }
-    
-    .common-words th {
-       background-color: rgba(0, 0, 0, 0.5);
-    }
+        .common-words table {
+            width: 100%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            color: #fff;
+        }
+
+        .common-words th,
+        .common-words td {
+            padding: 10px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .common-words th {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
 
 
-    .download-btn {
-        padding: 10px 20px;
-        background-color: #28a745;
-        color: #fff;
-        text-decoration: none;
-        border-radius: 5px;
-        font-size: 16px;
-        transition: background-color 0.3s ease;
-    }
+        .download-btn {
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
 
-    .download-btn:hover {
-        background-color: #218838;
-    }
-    .marquee {
+        .download-btn:hover {
+            background-color: #218838;
+        }
+
+        .marquee {
             width: 100%;
             overflow: hidden;
             white-space: nowrap;
@@ -189,12 +197,14 @@
             from {
                 transform: translateX(100%);
             }
+
             to {
                 transform: translateX(-100%);
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Sentiment Analysis Results</h1>
@@ -203,29 +213,29 @@
         <!-- Sentiment Cards -->
         <div class="card-container">
             <div class="card positive">
-               <h3>Positive Reviews ({{ positive_count }})</h3>
-               <ul>
-                   {% for review in positive_reviews %}
-                  <li>{{ review['Review'] }} <span class="score">({{ review['Sentiment'] }})</span></li>
-                  {% endfor %}
-              </ul>
-          </div>
-          <div class="card neutral">
-              <h3>Neutral Reviews ({{ neutral_count }})</h3>
-              <ul>
-                  {% for review in neutral_reviews %}
-                 <li>{{ review['Review'] }} <span class="score">({{ review['Sentiment'] }})</span></li>
-                 {% endfor %}
-             </ul>
-          </div>
-           <div class="card negative">
-             <h3>Negative Reviews ({{ negative_count }})</h3>
-             <ul>
-                 {% for review in negative_reviews %}
-                 <li>{{ review['Review'] }} <span class="score">({{ review['Sentiment'] }})</span></li>
-                 {% endfor %}
-             </ul>
-         </div> 
+                <h3>Positive Reviews ({{ positive_count }})</h3>
+                <ul>
+                    {% for review in positive_reviews %}
+                    <li>{{ review['Review'] }} <span class="score">({{ review['Sentiment'] }})</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card neutral">
+                <h3>Neutral Reviews ({{ neutral_count }})</h3>
+                <ul>
+                    {% for review in neutral_reviews %}
+                    <li>{{ review['Review'] }} <span class="score">({{ review['Sentiment'] }})</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
+            <div class="card negative">
+                <h3>Negative Reviews ({{ negative_count }})</h3>
+                <ul>
+                    {% for review in negative_reviews %}
+                    <li>{{ review['Review'] }} <span class="score">({{ review['Sentiment'] }})</span></li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
         <div class="container">
             <h2>Fraud/Spam Reviews</h2>
@@ -260,31 +270,36 @@
         <div class="charts-container">
             <div class="chart">
                 <h3>Sentiment Distribution</h3>
-                <img src="{{ url_for('static', filename='sentiment_pie_chart.png') }}" alt="Sentiment Distribution Pie Chart">
+                <img src="{{ url_for('static', filename='sentiment_pie_chart.png') }}"
+                    alt="Sentiment Distribution Pie Chart">
             </div>
             <div class="chart">
                 <h3>Sentiment Polarity Scores</h3>
-                <img src="{{ url_for('static', filename='sentiment_scores_chart.png') }}" alt="Sentiment Polarity Distribution">
+                <img src="{{ url_for('static', filename='sentiment_scores_chart.png') }}"
+                    alt="Sentiment Polarity Distribution">
             </div>
             <div class="chart">
                 <h3>Sentiment Bar Chart</h3>
-                <img src="{{ url_for('static', filename='sentiment_bar_chart.png') }}" alt="Sentiment Polarity Distribution">
+                <img src="{{ url_for('static', filename='sentiment_bar_chart.png') }}"
+                    alt="Sentiment Polarity Distribution">
             </div>
-            </div>
-            <button id="printButton" class="btn btn-primary mt-3">Print Results</button>
-            <script>
-                // JavaScript to handle the print functionality
-                document.getElementById("printButton").addEventListener("click", function () {
-                    window.print();
-                });
-            </script>
+        </div>
+        <button id="printButton" class="btn btn-primary mt-3">Print Results</button>
+        <script>
+            // JavaScript to handle the print functionality
+            document.getElementById("printButton").addEventListener("click", function () {
+                window.print();
+            });
+        </script>
         <!-- Back Button -->
         <a href="/" class="back-btn">Analyze Another File</a>
         <div class="container">
             <!-- Marquee -->
             <div class="marquee">
-                <span>⚠ The reports made here are completely based on trained datasets. They might sometimes be incorrect. ⚠ Please verify results for critical applications. Thank you!😊</span>
+                <span>⚠ The reports made here are completely based on trained datasets. They might sometimes be
+                    incorrect. ⚠ Please verify results for critical applications. Thank you!😊</span>
             </div>
-    </div>
+        </div>
 </body>
+
 </html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,14 +19,16 @@
 
         body::before {
             content: "";
-            background: rgba(0, 0, 0, 0.85); /* Add a dark overlay */
+            background: rgba(0, 0, 0, 0.85);
+            /* Add a dark overlay */
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
             z-index: -1;
-            pointer-events: none; /* Prevents interaction */
+            pointer-events: none;
+            /* Prevents interaction */
         }
 
         .container {
@@ -131,15 +134,25 @@
 
         /* Animation */
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
-        h1, h2, .stat-card {
+        h1,
+        h2,
+        .stat-card {
             animation: fadeIn 1.5s ease-in-out;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <h1>Review Report</h1>
@@ -164,21 +177,21 @@
         <h2>Sample Positive Reviews</h2>
         <ul>
             {% for review in report['sample_positive'] %}
-                <li>{{ review }}</li>
+            <li>{{ review }}</li>
             {% endfor %}
         </ul>
 
         <h2>Sample Neutral Reviews</h2>
         <ul>
             {% for review in report['sample_neutral'] %}
-                <li>{{ review }}</li>
+            <li>{{ review }}</li>
             {% endfor %}
         </ul>
 
         <h2>Sample Negative Reviews</h2>
         <ul>
             {% for review in report['sample_negative'] %}
-                <li>{{ review }}</li>
+            <li>{{ review }}</li>
             {% endfor %}
         </ul>
 
@@ -188,7 +201,7 @@
         <h3>Most Common Words (Top 10)</h3>
         <ul>
             {% for word, freq in report['most_common_words'] %}
-                <li>{{ word }}: {{ freq }}</li>
+            <li>{{ word }}: {{ freq }}</li>
             {% endfor %}
         </ul>
         <p><strong>Average Review Length (characters):</strong> {{ report['avg_review_length'] }}</p>
@@ -207,4 +220,5 @@
         <a href="/">Back to Home</a>
     </div>
 </body>
+
 </html>
