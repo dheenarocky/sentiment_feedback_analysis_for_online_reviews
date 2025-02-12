@@ -105,6 +105,16 @@ pip install -r requirements.txt
 11.flask-sqlalchemy: For integrating SQLAlchemy with Flask.
 
 ---
+
+## Frontend - Backend
+
+Frontend - HTML/CSS/JS(for some loading screen effects)
+
+Backend - Python Flask(main backend framework), Python SQLalchemy(for database)
+
+Software - VS Code
+
+
 ## How to Run the Project
 
 1. **Clone the Repository**:
