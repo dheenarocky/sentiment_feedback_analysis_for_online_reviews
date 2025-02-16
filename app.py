@@ -1,5 +1,7 @@
 from flask import Flask, request, render_template, redirect, url_for, flash, session
 from matplotlib import pyplot as plt
+import matplotlib
+matplotlib.use('Agg')
 from wordcloud import WordCloud
 import pandas as pd
 import os
@@ -31,23 +33,21 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
-# Load pre-trained model and vectorizer
-model = joblib.load('models/random_forest_model.pkl')
-# Initialize fraud_model and vectorizer to None
-fraud_model = None
-vectorizer = None
-# Load the saved model and vectorizer with error handling
+# Load the saved models and vectorizers with error handling
+try:
+    sentiment_model = joblib.load('models/sentiment_model.pkl')
+except (EOFError, FileNotFoundError) as e:
+    print(f"Error loading sentiment analysis model: {e}")
+
+try:
+    tfidf_vectorizer = joblib.load('models/tfidf_vectorizer.pkl')
+except (EOFError, FileNotFoundError) as e:
+    print(f"Error loading TF-IDF vectorizer 1: {e}")
+
 try:
     fraud_model = joblib.load('models/fraud_detection_model.pkl')
 except (EOFError, FileNotFoundError) as e:
     print(f"Error loading fraud detection model: {e}")
-
-
-try:
-    vectorizer = joblib.load('models/fraud_tfidf_vectorizer.pkl')
-except (EOFError, FileNotFoundError) as e:
-    print(f"Error loading fraud TFIDF vectorizer: {e}")
-   
 
 # Check allowed file types
 def allowed_file(filename):
@@ -61,7 +61,7 @@ def generate_wordcloud(text, filename):
 def index():
     return render_template('index.html')
 
-@app.route('/upload', methods=['POST'])
+@app.route('/upload', methods=['GET', 'POST'])
 def upload_file():
     if 'file' not in request.files:
         flash('No file part')
@@ -81,8 +81,8 @@ def upload_file():
             lambda x: 'Positive' if x > 0.1 else ('Neutral' if -0.1 <= x <= 0.1 else 'Negative')
         )
         # Transform the data using the vectorizer
-        if vectorizer is not None:
-            X_transformed = vectorizer.transform(df['Review'])
+        if tfidf_vectorizer is not None:
+            X_transformed = tfidf_vectorizer.transform(df['Review'])
             # Continue processing with X_transformed
         else:
             print("Vectorizer is not loaded. Cannot transform data.")
@@ -117,10 +117,18 @@ def upload_file():
         common_words = word_counts.most_common(10)  # Get top 10 words
 
         # Detect fraud/spam reviews
-        X_transformed = vectorizer.transform(df['Review'])
+        X_transformed = tfidf_vectorizer.transform(df['Review'])
         predictions = fraud_model.predict(X_transformed)
         df['Fraud_Label'] = predictions
-        fraud_reviews = df[df['Fraud_Label'] == 1]
+
+        # Get all spam reviews
+        all_fraud_reviews = df[df['Fraud_Label'] == 1]
+        
+        # Randomly sample up to 50 spam reviews for display
+        fraud_reviews = all_fraud_reviews.sample(n=min(50, len(all_fraud_reviews)), random_state=42)
+        
+        # Get the total count of spam reviews
+        total_fraud = len(all_fraud_reviews)
 
         # Generate pie chart for sentiment distribution
         sentiment_counts = df['Sentiment_Label'].value_counts()

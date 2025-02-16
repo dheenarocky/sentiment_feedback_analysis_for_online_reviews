@@ -11,59 +11,41 @@
 ```
 sentiment_feedback_analysis/
 │
-├── .gitattributes               # Git attributes configuration
-├── app.py                       # Main Flask application script
-├── data/                        # Folder containing datasets used for training models
-│   ├── cleaned_reviews.csv
-│   ├── reviews.csv
-│   ├── sample_reviews.csv
-│   ├── X_test.csv
-│   ├── X_train.csv
-│   ├── y_test.csv
-│   └── y_train.csv
-├── instance/                    # Flask instance folder (e.g., for config or uploads)
-├── models/                      # Folder containing models and scripts
-│   ├── data_preprocessing.py    # Script for preprocessing data
-│   ├── fraud_detection_model.pkl  # Trained fraud detection model
-│   ├── fraud_tfidf_vectorizer.pkl # TF-IDF vectorizer for fraud detection
-│   ├── generateds.py            # Script to generate synthetic spam reviews
-│   ├── label_encoder.pkl        # Saved label encoder for categorization
-│   ├── label_encoder.py         # Script for label encoding
-│   ├── model.py                 # Script for training models
-│   ├── random_forest_model.pkl  # Saved Random Forest model
-│   ├── sentiment_model.pkl      # Saved sentiment analysis model
-│   ├── sentiment_model.py       # Script for sentiment analysis
-│   ├── spampreprocess.py        # Script for spam preprocessing
-├── models.py                    # Script for model-related logic
-├── notebooks/                   # Folder for exploratory notebooks and scripts
-│   ├── data_exploration.ipynb   # Jupyter notebook for exploring datasets
-├── README.MD                    # Detailed project documentation
-├── requirements.txt             # Required Python dependencies
-├── requirements(v).txt          # Alternate dependency file with version
-├── static/                      # Folder for static files (CSS, images, etc.)
-│   ├── background.jpg           # Background image for the web app
-│   ├── member.jpg               # Team member image (if any)
-│   ├── report_background.jpg    # Background for reports
-│   ├── styles.css               # Main stylesheet
-│   ├── styles1.css              # Alternate stylesheet
-├── templates/                   # Folder containing HTML templates
-│   ├── about.html               # About page
-│   ├── admin_login.html         # Admin login page
-│   ├── classification_result.html  # Results page after analysis
-│   ├── contact.html             # Contact form page
-│   ├── contact_success.html     # Contact success page
-│   ├── index.html               # Main landing page
-│   ├── report.html              # Report view page
-│   └── view_messages.html       # Admin view for messages
-├── sample_datasets/                     # Folder to store uploaded files
-│   ├── cleaned_reviews1.csv
-│   ├── fraud_sample_reviews.csv
-│   ├── reviews1.csv
-│   ├── sample_reviews1.csv
-│   └── sample_reviews2.csv
-└── last_report.json             # JSON file for storing the latest report data
-```
-
+├── data/                             # Data folder for datasets
+├── models/                           # Folder for ML models and scripts
+│   ├── fraud_detection_model.pkl
+│   ├── fraud_detection_model.py
+│   ├── random_forest_model.pkl
+│   ├── random_forest_model.py
+│   ├── sentiment_model.pkl
+│   ├── sentiment_model.py
+│   └── tfidf_vectorizer.pkl
+│
+├── notebooks/                        # Jupyter notebook folder
+│   ├── data_analysis.py
+│   └── data_exploration.ipynb
+│
+├── sample_datasets/                  # Folder for additional sample datasets
+│
+├── templates/                        # HTML templates for the frontend
+│   ├── about.html
+│   ├── admin_login.html
+│   ├── classification_result.html
+│   ├── contact.html
+│   ├── contact_success.html
+│   ├── index.html
+│   ├── report.html
+│   └── view_messages.html
+│
+├── uploads/                          # Folder for uploaded files
+├── static/                           # Static assets (e.g., CSS, images)
+├── .github/                          # GitHub-specific settings
+├── app.py                            # Main application script
+├── models.py                         # Model utilities script
+├── README.md                         # Project description
+├── requirements.txt                  # Python library requirements
+├── requirements(v).txt               # Python library requirements with version
+└── SECURITY.md                       # Security information
 ---
 
 ## Features
