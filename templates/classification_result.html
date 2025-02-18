@@ -41,30 +41,47 @@
         }
 
         h1 {
-    color: #bbf305; /* Your original yellow color */
-    margin-bottom: 20px;
-    font-family: 'Trebuchet MS', sans-serif; /* Modern font */
-    font-size: 36px; /* Larger font size */
-    font-weight: bold;
-    letter-spacing: 2px; /* Add spacing between letters for style */
-    text-transform: uppercase; /* Optional: makes all letters uppercase */
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Shadow effect for depth */
-    border-bottom: 2px solid #bbf305; /* Underline for emphasis */
-    padding-bottom: 10px; /* Padding for the underline */
-}
+            color: #bbf305;
+            /* Your original yellow color */
+            margin-bottom: 20px;
+            font-family: 'Trebuchet MS', sans-serif;
+            /* Modern font */
+            font-size: 36px;
+            /* Larger font size */
+            font-weight: bold;
+            letter-spacing: 2px;
+            /* Add spacing between letters for style */
+            text-transform: uppercase;
+            /* Optional: makes all letters uppercase */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6);
+            /* Shadow effect for depth */
+            border-bottom: 2px solid #bbf305;
+            /* Underline for emphasis */
+            padding-bottom: 10px;
+            /* Padding for the underline */
+        }
 
-h2 {
-    color: #f8f8f8; /* Original color */
-    font-family: 'Georgia', serif; /* Elegant, serif font for contrast */
-    font-size: 28px; /* Slightly larger font size */
-    font-weight: 600; /* Medium-bold for better readability */
-    letter-spacing: 1px; /* Subtle spacing */
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Softer shadow effect */
-    border-left: 4px solid #f8f8f8; /* Vertical left border for visual interest */
-    padding-left: 15px; /* Padding to create space from the border */
-    margin-bottom: 20px;
-    text-transform: capitalize; /* Capitalizes the first letter of each word */
-}
+        h2 {
+            color: #f8f8f8;
+            /* Original color */
+            font-family: 'Georgia', serif;
+            /* Elegant, serif font for contrast */
+            font-size: 28px;
+            /* Slightly larger font size */
+            font-weight: 600;
+            /* Medium-bold for better readability */
+            letter-spacing: 1px;
+            /* Subtle spacing */
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+            /* Softer shadow effect */
+            border-left: 4px solid #f8f8f8;
+            /* Vertical left border for visual interest */
+            padding-left: 15px;
+            /* Padding to create space from the border */
+            margin-bottom: 20px;
+            text-transform: capitalize;
+            /* Capitalizes the first letter of each word */
+        }
 
         /* Chart Container */
         .charts-container {
@@ -227,15 +244,19 @@ h2 {
         }
 
         .refresh-symbol {
-            all: unset; /* Resets all default browser button styles */
+            all: unset;
+            /* Resets all default browser button styles */
             cursor: pointer;
-            font-size: 24px; /* Size of the icon */
-            color: #f8f8f8; /* Default color */
+            font-size: 24px;
+            /* Size of the icon */
+            color: #f8f8f8;
+            /* Default color */
             transition: color 0.3s ease;
         }
 
         .refresh-symbol:hover {
-            color: #3498db; /* Change color when hovered */
+            color: #3498db;
+            /* Change color when hovered */
         }
 
         /* Loading Screen */
@@ -294,17 +315,20 @@ h2 {
                 opacity: 1;
             }
         }
+
         .print-symbol {
-    font-size: 36px; /* Size of the icon */
-    color: #4caf50; /* Green for a professional look */
-    cursor: pointer;
-    transition: color 0.3s;
-}
+            font-size: 36px;
+            /* Size of the icon */
+            color: #4caf50;
+            /* Green for a professional look */
+            cursor: pointer;
+            transition: color 0.3s;
+        }
 
-.print-symbol:hover {
-    color: #388e3c; /* Darker green on hover */
-}
-
+        .print-symbol:hover {
+            color: #388e3c;
+            /* Darker green on hover */
+        }
     </style>
 </head>
 
@@ -316,9 +340,10 @@ h2 {
     </div>
     <div class="container">
         <h1>Sentimental Feedback Analysis Report</h1>
-        <h2>Summary of Reviews (Positive,Neutral,Negative)&nbsp&nbsp&nbsp&nbsp&nbsp<button id="refreshButton" class="refresh-symbol" title="Refresh Results">
-            <i class="fas fa-sync-alt"></i> 
-        </button></h2>
+        <h2>Summary of Reviews (Positive,Neutral,Negative)&nbsp&nbsp&nbsp&nbsp&nbsp<button id="refreshButton"
+                class="refresh-symbol" title="Refresh Results">
+                <i class="fas fa-sync-alt"></i>
+            </button></h2>
 
         <!-- Sentiment Cards -->
         <div class="card-container">
@@ -375,7 +400,8 @@ h2 {
                 </tbody>
             </table>
         </div>
-        <br><h2>Graphical Representation of Generated Report</h2>
+        <br>
+        <h2>Graphical Representation of Generated Report</h2>
         <!-- Charts -->
         <div class="charts-container">
             <div class="chart">
@@ -394,7 +420,7 @@ h2 {
                     alt="Sentiment Polarity Distribution">
             </div>
         </div>
-        
+
         <script>
             // JavaScript to handle the refresh functionality
             document.getElementById("refreshButton").addEventListener("click", function () {
@@ -402,11 +428,11 @@ h2 {
             });
         </script>
         <h3>Download the report(Click below👇🏻. . .)</h3>
-          <!-- Print Button -->
+        <!-- Print Button -->
         <span id="printButton" class="material-icons print-symbol" title="Print Results">print</span>
-         
-         
-         <script>
+
+
+        <script>
             // JavaScript to handle the print functionality
             document.getElementById("printButton").addEventListener("click", function () {
                 window.print();
@@ -414,45 +440,45 @@ h2 {
         </script>
         <!-- Back Button --><br>
         <a href="/" class="back-btn">Analyze Another File</a>
-    <script>
-        // Attach click event to the refresh button
-        document.getElementById("refreshButton").addEventListener("click", function () {
-            showLoadingScreen(); // Show the loading screen
-            setTimeout(function () {
-                location.reload(); // Refresh the page after 2 seconds
-            }, 2000); // Adjust delay as needed
-        });
-    
-        function showLoadingScreen() {
-            const loadingScreen = document.getElementById('loading-screen');
-            const loadingMessage = document.getElementById('loading-message');
-    
-            loadingScreen.style.display = 'flex';
-    
-            const messages = [
-                "Processing. . .",
-                "Hold on a sec. . .",
-                "Almost there. . .",
-                "Loading. . ."
-            ];
-    
-            let index = 0;
-            setInterval(() => {
-                if (index < messages.length) {
-                    loadingMessage.textContent = messages[index];
-                    index++;
-                }
-            }, 2000);
-        }
-    </script>
-    
-    <br><br>
-        
-            <!-- Marquee -->
-            <div class="marquee">
-                <span>⚠ The reports made here are completely based on trained datasets. They might sometimes be
-                    incorrect. ⚠ Please verify results for critical applications. Thank you!😊</span>
-            </div>  
+        <script>
+            // Attach click event to the refresh button
+            document.getElementById("refreshButton").addEventListener("click", function () {
+                showLoadingScreen(); // Show the loading screen
+                setTimeout(function () {
+                    location.reload(); // Refresh the page after 2 seconds
+                }, 2000); // Adjust delay as needed
+            });
+
+            function showLoadingScreen() {
+                const loadingScreen = document.getElementById('loading-screen');
+                const loadingMessage = document.getElementById('loading-message');
+
+                loadingScreen.style.display = 'flex';
+
+                const messages = [
+                    "Processing. . .",
+                    "Hold on a sec. . .",
+                    "Almost there. . .",
+                    "Loading. . ."
+                ];
+
+                let index = 0;
+                setInterval(() => {
+                    if (index < messages.length) {
+                        loadingMessage.textContent = messages[index];
+                        index++;
+                    }
+                }, 2000);
+            }
+        </script>
+
+        <br><br>
+
+        <!-- Marquee -->
+        <div class="marquee">
+            <span>⚠ The reports made here are completely based on trained datasets. They might sometimes be
+                incorrect. ⚠ Please verify results for critical applications. Thank you!😊</span>
+        </div>
     </div>
 </body>
 
