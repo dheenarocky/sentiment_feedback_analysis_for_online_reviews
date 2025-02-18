@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sentiment Analysis Results</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='styles1.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
     <style>
         /* General Styles */
         body {
@@ -37,11 +40,31 @@
             }
         }
 
-        h1,
-        h2 {
-            color: #f8f8f8;
-            margin-bottom: 20px;
-        }
+        h1 {
+    color: #bbf305; /* Your original yellow color */
+    margin-bottom: 20px;
+    font-family: 'Trebuchet MS', sans-serif; /* Modern font */
+    font-size: 36px; /* Larger font size */
+    font-weight: bold;
+    letter-spacing: 2px; /* Add spacing between letters for style */
+    text-transform: uppercase; /* Optional: makes all letters uppercase */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.6); /* Shadow effect for depth */
+    border-bottom: 2px solid #bbf305; /* Underline for emphasis */
+    padding-bottom: 10px; /* Padding for the underline */
+}
+
+h2 {
+    color: #f8f8f8; /* Original color */
+    font-family: 'Georgia', serif; /* Elegant, serif font for contrast */
+    font-size: 28px; /* Slightly larger font size */
+    font-weight: 600; /* Medium-bold for better readability */
+    letter-spacing: 1px; /* Subtle spacing */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Softer shadow effect */
+    border-left: 4px solid #f8f8f8; /* Vertical left border for visual interest */
+    padding-left: 15px; /* Padding to create space from the border */
+    margin-bottom: 20px;
+    text-transform: capitalize; /* Capitalizes the first letter of each word */
+}
 
         /* Chart Container */
         .charts-container {
@@ -202,13 +225,100 @@
                 transform: translateX(-100%);
             }
         }
+
+        .refresh-symbol {
+            all: unset; /* Resets all default browser button styles */
+            cursor: pointer;
+            font-size: 24px; /* Size of the icon */
+            color: #f8f8f8; /* Default color */
+            transition: color 0.3s ease;
+        }
+
+        .refresh-symbol:hover {
+            color: #3498db; /* Change color when hovered */
+        }
+
+        /* Loading Screen */
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+        }
+
+        .spinner {
+            border: 8px solid #f3f3f3;
+            border-radius: 50%;
+            border-top: 8px solid #3498db;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin-bottom: 20px;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-message {
+            font-size: 20px;
+            font-weight: bold;
+            color: #ffffff;
+            margin-top: 10px;
+            animation: fadeIn 2s infinite;
+        }
+
+        @keyframes fadeIn {
+
+            0%,
+            100% {
+                opacity: 0.6;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+        .print-symbol {
+    font-size: 36px; /* Size of the icon */
+    color: #4caf50; /* Green for a professional look */
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.print-symbol:hover {
+    color: #388e3c; /* Darker green on hover */
+}
+
     </style>
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+        <div class="spinner"></div>
+        <p id="loading-message" class="loading-message">Refreshing reviews. . .</p>
+    </div>
     <div class="container">
-        <h1>Sentiment Analysis Results</h1>
-        <h2>Summary of Reviews by Sentiment</h2>
+        <h1>Sentimental Feedback Analysis Report</h1>
+        <h2>Summary of Reviews (Positive,Neutral,Negative)&nbsp&nbsp&nbsp&nbsp&nbsp<button id="refreshButton" class="refresh-symbol" title="Refresh Results">
+            <i class="fas fa-sync-alt"></i> 
+        </button></h2>
 
         <!-- Sentiment Cards -->
         <div class="card-container">
@@ -265,7 +375,7 @@
                 </tbody>
             </table>
         </div>
-
+        <br><h2>Graphical Representation of Generated Report</h2>
         <!-- Charts -->
         <div class="charts-container">
             <div class="chart">
@@ -284,22 +394,66 @@
                     alt="Sentiment Polarity Distribution">
             </div>
         </div>
-        <button id="printButton" class="btn btn-primary mt-3">Print Results</button>
+        
         <script>
+            // JavaScript to handle the refresh functionality
+            document.getElementById("refreshButton").addEventListener("click", function () {
+                location.reload(); // Reload the page
+            });
+        </script>
+        <h3>Download the report(Click below👇🏻. . .)</h3>
+          <!-- Print Button -->
+        <span id="printButton" class="material-icons print-symbol" title="Print Results">print</span>
+         
+         
+         <script>
             // JavaScript to handle the print functionality
             document.getElementById("printButton").addEventListener("click", function () {
                 window.print();
             });
         </script>
-        <!-- Back Button -->
+        <!-- Back Button --><br>
         <a href="/" class="back-btn">Analyze Another File</a>
-        <div class="container">
+    <script>
+        // Attach click event to the refresh button
+        document.getElementById("refreshButton").addEventListener("click", function () {
+            showLoadingScreen(); // Show the loading screen
+            setTimeout(function () {
+                location.reload(); // Refresh the page after 2 seconds
+            }, 2000); // Adjust delay as needed
+        });
+    
+        function showLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const loadingMessage = document.getElementById('loading-message');
+    
+            loadingScreen.style.display = 'flex';
+    
+            const messages = [
+                "Processing. . .",
+                "Hold on a sec. . .",
+                "Almost there. . .",
+                "Loading. . ."
+            ];
+    
+            let index = 0;
+            setInterval(() => {
+                if (index < messages.length) {
+                    loadingMessage.textContent = messages[index];
+                    index++;
+                }
+            }, 2000);
+        }
+    </script>
+    
+    <br><br>
+        
             <!-- Marquee -->
             <div class="marquee">
                 <span>⚠ The reports made here are completely based on trained datasets. They might sometimes be
                     incorrect. ⚠ Please verify results for critical applications. Thank you!😊</span>
-            </div>
-        </div>
+            </div>  
+    </div>
 </body>
 
 </html>
