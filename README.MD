@@ -15,10 +15,8 @@ sentiment_feedback_analysis/
 ├── models/                           # Folder for ML models and scripts
 │   ├── fraud_detection_model.pkl
 │   ├── fraud_detection_model.py
-│   ├── random_forest_model.pkl
 │   ├── random_forest_model.py
-│   ├── sentiment_model.pkl
-│   ├── sentiment_model.py
+│   ├── random_forest_model1.pkl
 │   └── tfidf_vectorizer.pkl
 │
 ├── notebooks/                        # Jupyter notebook folder
@@ -46,6 +44,7 @@ sentiment_feedback_analysis/
 ├── requirements.txt                  # Python library requirements
 ├── requirements(v).txt               # Python library requirements with version
 └── SECURITY.md                       # Security information
+└── addon.txt                         # Misc Workspace
 ---
 
 ## Features
