@@ -34,13 +34,14 @@ if not os.path.exists(UPLOAD_FOLDER):
     os.makedirs(UPLOAD_FOLDER)
 
 # Load the saved models and vectorizers with error handling
-try:
-    sentiment_model = joblib.load('models/sentiment_model.pkl')
-except (EOFError, FileNotFoundError) as e:
-    print(f"Error loading sentiment analysis model: {e}")
 
 try:
-    tfidf_vectorizer = joblib.load('models/tfidf_vectorizer.pkl')
+    sentiment_model = joblib.load('models/random_forest_model1.pkl')
+except (EOFError, FileNotFoundError) as e:
+    print(f"Error loading random forest model: {e}")
+
+try:
+    tfidf_vectorizer1 = joblib.load('models/tfidf_vectorizer1.pkl')
 except (EOFError, FileNotFoundError) as e:
     print(f"Error loading TF-IDF vectorizer 1: {e}")
 
@@ -81,8 +82,8 @@ def upload_file():
             lambda x: 'Positive' if x > 0.1 else ('Neutral' if -0.1 <= x <= 0.1 else 'Negative')
         )
         # Transform the data using the vectorizer
-        if tfidf_vectorizer is not None:
-            X_transformed = tfidf_vectorizer.transform(df['Review'])
+        if tfidf_vectorizer1 is not None:
+            X_transformed = tfidf_vectorizer1.transform(df['Review'])
             # Continue processing with X_transformed
         else:
             print("Vectorizer is not loaded. Cannot transform data.")
@@ -117,13 +118,13 @@ def upload_file():
         common_words = word_counts.most_common(10)  # Get top 10 words
 
         # Detect fraud/spam reviews
-        X_transformed = tfidf_vectorizer.transform(df['Review'])
+        X_transformed = tfidf_vectorizer1.transform(df['Review'])
         predictions = fraud_model.predict(X_transformed)
         df['Fraud_Label'] = predictions
 
         # Get all spam reviews
         all_fraud_reviews = df[df['Fraud_Label'] == 1]
-        
+
         # Randomly sample up to 50 spam reviews for display
         fraud_reviews = all_fraud_reviews.sample(n=min(50, len(all_fraud_reviews)), random_state=42)
         

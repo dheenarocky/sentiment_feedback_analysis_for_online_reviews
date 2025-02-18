@@ -34,6 +34,6 @@ print("Classification Report:\n", classification_report(y_test, y_pred))
 
 # Step 6: Save the model and vectorizer
 joblib.dump(fraud_model, 'models/fraud_detection_model.pkl')
-joblib.dump(tfidf_vectorizer, 'models/tfidf_vectorizer.pkl')
+joblib.dump(tfidf_vectorizer, 'models/tfidf_vectorizer1.pkl')
 
 print("Model and vectorizer saved successfully.")

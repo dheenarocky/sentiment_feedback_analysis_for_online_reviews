@@ -1,6 +1,7 @@
 import pandas as pd
 import joblib
 import re
+import os
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -10,7 +11,7 @@ from nltk.corpus import stopwords
 nltk.download('stopwords')
 
 # Load cleaned data
-data = pd.read_csv('data/new_dataset.csv')  # Ensure you're using the correct cleaned dataset
+data = pd.read_csv('data/reviews.csv')  # Ensure you're using the correct cleaned dataset
 
 # Preprocessing function
 def preprocess_text(text):
@@ -55,6 +56,9 @@ y_pred = model.predict(X_test)
 # Evaluate the model
 print(classification_report(y_test, y_pred))
 
-# Save the model
-joblib.dump(model, 'models/random_forest_model.pkl')
-print("Model saved as 'random_forest_model.pkl'")
+# Try saving the model and catch any errors
+try:
+    joblib.dump(model, 'models/random_forest_model1.pkl')
+    print("Model saved as 'random_forest_model1.pkl'")
+except Exception as e:
+    print(f"Error saving model: {e}")
