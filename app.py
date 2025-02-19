@@ -10,9 +10,12 @@ import joblib
 from textblob import TextBlob
 import pytz
 from collections import Counter
+import smtplib
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
+from dotenv import load_dotenv
+
 app = Flask(__name__)
 app.secret_key = 'hellomyproject'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///contact_messages.db'
@@ -28,6 +31,7 @@ with app.app_context():
 UPLOAD_FOLDER = 'uploads'
 ALLOWED_EXTENSIONS = {'csv','txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
+load_dotenv()  # Load variables from .env
 
 # Ensure upload folder exists
 if not os.path.exists(UPLOAD_FOLDER):
@@ -229,6 +233,48 @@ def delete_message(message_id):
     db.session.commit()
     flash('Message deleted successfully!✅', 'success')
     return redirect(url_for('view_messages'))
+
+# Email page route
+@app.route('/email', methods=['GET', 'POST'])
+def email_page():
+    recipient = request.args.get('recipient', '')
+
+    if request.method == 'POST':
+        subject = request.form.get('subject')
+        message = request.form.get('message')
+
+        # Send the email
+        try:
+            send_email(recipient, subject, message)
+            print(f"Email sent to {recipient} with subject: '{subject}'")
+            return redirect(url_for('email_success'))
+        except Exception as e:
+            print(f"Error sending email: {e}")
+            return "Failed to send email. Please try again."
+
+    return render_template('email.html', recipient=recipient)
+
+# Function to send email
+def send_email(recipient, subject, body):
+    sender_email = os.getenv("EMAIL")
+    sender_password = os.getenv("EMAIL_PASSWORD")
+    smtp_server = "smtp.gmail.com"
+    smtp_port = 587
+
+    try:
+        with smtplib.SMTP(smtp_server, smtp_port) as server:
+            server.starttls()  # Upgrade to a secure connection
+            server.login(sender_email, sender_password)
+            email_message = f"Subject: {subject}\n\n{body}"
+            server.sendmail(sender_email, recipient, email_message)
+            print(f"Email sent to {recipient}")
+    except Exception as e:
+        print(f"Failed to send email: {e}")
+
+# Email success page route
+@app.route('/email_success', methods=['GET'])
+def email_success():
+    return render_template('email_success.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

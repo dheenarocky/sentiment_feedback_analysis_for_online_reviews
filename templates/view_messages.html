@@ -107,7 +107,26 @@
             font-size: 1.2em;
             color: #ccc;
         }
+        .btn-reply {
+            color: white;
+            background-color: #28a745;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .btn-reply:hover {
+            background-color: #218838;
+        }
+
     </style>
+    <script>
+        function redirectToEmail(email) {
+            window.location.href = `/email?recipient=${encodeURIComponent(email)}`;
+        }
+    </script>
 </head>
 
 <body>
@@ -138,6 +157,7 @@
                             onsubmit="return confirm('Are you sure you want to delete this message?');">
                             <button type="submit" class="btn-delete">Delete</button>
                         </form>
+                        <button class="btn-reply" onclick="redirectToEmail('{{ msg.email }}')">Reply&nbsp</button>
                     </td>
                 </tr>
                 {% endfor %}
