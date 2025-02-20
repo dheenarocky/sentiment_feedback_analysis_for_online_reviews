@@ -45,14 +45,14 @@ except (EOFError, FileNotFoundError) as e:
     print(f"Error loading random forest model: {e}")
 
 try:
-    tfidf_vectorizer1 = joblib.load('models/tfidf_vectorizer1.pkl')
+    tfidf_vectorizer2 = joblib.load('models/tfidf_vectorizer2.pkl')
 except (EOFError, FileNotFoundError) as e:
-    print(f"Error loading TF-IDF vectorizer 1: {e}")
+    print(f"Error loading TF-IDF vectorizer 2: {e}")
 
 try:
-    fraud_model = joblib.load('models/fraud_detection_model.pkl')
+    fraud_model = joblib.load('models/fraud_detection_model1.pkl')
 except (EOFError, FileNotFoundError) as e:
-    print(f"Error loading fraud detection model: {e}")
+    print(f"Error loading fraud detection model1: {e}")
 
 # Check allowed file types
 def allowed_file(filename):
@@ -85,14 +85,6 @@ def upload_file():
         df['Sentiment_Label'] = df['Sentiment'].apply(
             lambda x: 'Positive' if x > 0.1 else ('Neutral' if -0.1 <= x <= 0.1 else 'Negative')
         )
-        # Transform the data using the vectorizer
-        if tfidf_vectorizer1 is not None:
-            X_transformed = tfidf_vectorizer1.transform(df['Review'])
-            # Continue processing with X_transformed
-        else:
-            print("Vectorizer is not loaded. Cannot transform data.")
-            # Handle the error appropriately
-            return redirect(request.url)
 
         # Generate counts
         positive_count = (df['Sentiment_Label'] == 'Positive').sum()
@@ -122,7 +114,7 @@ def upload_file():
         common_words = word_counts.most_common(10)  # Get top 10 words
 
         # Detect fraud/spam reviews
-        X_transformed = tfidf_vectorizer1.transform(df['Review'])
+        X_transformed = tfidf_vectorizer2.transform(df['Review'])
         predictions = fraud_model.predict(X_transformed)
         df['Fraud_Label'] = predictions
 
@@ -234,7 +226,6 @@ def delete_message(message_id):
     flash('Message deleted successfully!✅', 'success')
     return redirect(url_for('view_messages'))
 
-# Email page route
 @app.route('/email', methods=['GET', 'POST'])
 def email_page():
     recipient = request.args.get('recipient', '')
@@ -243,14 +234,14 @@ def email_page():
         subject = request.form.get('subject')
         message = request.form.get('message')
 
-        # Send the email
+        # Attempt to send the email
         try:
             send_email(recipient, subject, message)
             print(f"Email sent to {recipient} with subject: '{subject}'")
             return redirect(url_for('email_success'))
         except Exception as e:
             print(f"Error sending email: {e}")
-            return "Failed to send email. Please try again."
+            return render_template('email_failed.html')
 
     return render_template('email.html', recipient=recipient)
 
@@ -261,17 +252,13 @@ def send_email(recipient, subject, body):
     smtp_server = "smtp.gmail.com"
     smtp_port = 587
 
-    try:
-        with smtplib.SMTP(smtp_server, smtp_port) as server:
-            server.starttls()  # Upgrade to a secure connection
-            server.login(sender_email, sender_password)
-            email_message = f"Subject: {subject}\n\n{body}"
-            server.sendmail(sender_email, recipient, email_message)
-            print(f"Email sent to {recipient}")
-    except Exception as e:
-        print(f"Failed to send email: {e}")
+    with smtplib.SMTP(smtp_server, smtp_port) as server:
+        server.starttls()  # Upgrade to a secure connection
+        server.login(sender_email, sender_password)
+        email_message = f"Subject: {subject}\n\n{body}"
+        server.sendmail(sender_email, recipient, email_message)
+        print(f"Email sent to {recipient}")
 
-# Email success page route
 @app.route('/email_success', methods=['GET'])
 def email_success():
     return render_template('email_success.html')
