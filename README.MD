@@ -22,11 +22,11 @@ sentiment_feedback_analysis/
 ├── instance/                # Flask instance folder for configurations
 │
 ├── models/                  # Folder for machine learning models
-│   ├── fraud_detection_model.pkl
+│   ├── fraud_detection_model1.pkl
 │   ├── fraud_detection_model.py
-│   ├── random_forest_model.pkl
 │   ├── random_forest_model1.pkl
-│   └── tfidf_vectorizer1.pkl
+│   ├── random_forest_model.py
+│   └── tfidf_vectorizer2.pkl
 │
 ├── notebooks/               # Folder for Jupyter Notebooks
 │   ├── data_analysis.py
@@ -53,6 +53,7 @@ sentiment_feedback_analysis/
 │   ├── contact_success.html
 │   ├── contact.html
 │   ├── email_success.html
+    ├──email_failed.html
 │   ├── email.html
 │   ├── index.html
 │   └── view_messages.html
