@@ -17,7 +17,7 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from dotenv import load_dotenv
 
 app = Flask(__name__)
-app.secret_key = 'hellomyproject'
+app.secret_key = os.getenv("SECRET_KEY", "default-secret-key") 
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///contact_messages.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
