@@ -11,52 +11,76 @@
 ```
 sentiment_feedback_analysis/
 │
-├── data/                             # Data folder for datasets
-├── models/                           # Folder for ML models and scripts
+├── _pycache__/             # Compiled Python files (ignored in production)
+│   └── models.cpython-313.pyc
+│
+├── .github/
+│   └── dependabot.yml       # GitHub Dependabot configuration
+│
+├── data/                    # Folder for storing datasets
+│
+├── instance/                # Flask instance folder for configurations
+│
+├── models/                  # Folder for machine learning models
 │   ├── fraud_detection_model.pkl
 │   ├── fraud_detection_model.py
-│   ├── random_forest_model.py
+│   ├── random_forest_model.pkl
 │   ├── random_forest_model1.pkl
-│   └── tfidf_vectorizer.pkl
+│   └── tfidf_vectorizer1.pkl
 │
-├── notebooks/                        # Jupyter notebook folder
+├── notebooks/               # Folder for Jupyter Notebooks
 │   ├── data_analysis.py
 │   └── data_exploration.ipynb
 │
-├── sample_datasets/                  # Folder for additional sample datasets
+├── sample_datasets/         # Sample datasets for testing
 │
-├── templates/                        # HTML templates for the frontend
+├── static/                  # Static files for the web application (CSS, images)
+│   ├── background.jpg
+│   ├── member.jpg
+│   ├── negative_wordcloud.png
+│   ├── neutral_wordcloud.png
+│   ├── positive_wordcloud.png
+│   ├── sentiment_bar_chart.png
+│   ├── sentiment_pie_chart.png
+│   ├── sentiment_scores_chart.png
+│   ├── styles.css
+│   └── styles1.css
+│
+├── templates/               # HTML templates for the web application
 │   ├── about.html
 │   ├── admin_login.html
 │   ├── classification_result.html
-│   ├── contact.html
 │   ├── contact_success.html
+│   ├── contact.html
+│   ├── email_success.html
+│   ├── email.html
 │   ├── index.html
-│   ├── report.html
 │   └── view_messages.html
 │
-├── uploads/                          # Folder for uploaded files
-├── static/                           # Static assets (e.g., CSS, images)
-├── .github/                          # GitHub-specific settings
-├── app.py                            # Main application script
-├── models.py                         # Model utilities script
-├── README.md                         # Project description
-├── requirements.txt                  # Python library requirements
-├── requirements(v).txt               # Python library requirements with version
-└── SECURITY.md                       # Security information
-└── addon.txt                         # Misc Workspace
+├── uploads/                 # Directory for uploaded files
+│
+├── .env                     # Environment variable configurations
+├── .gitattributes           # Git attribute settings
+├── .gitignore               # Files to ignore in Git
+├── addon.txt
+├── app.py                   # Main script to run the Flask application
+├── models.py                # Creating a database
+├── README.md                # Project description
+├── requirements.txt         # List of required Python libraries
+├── requirements(v).txt      # List of required Python libraries with version
+└── SECURITY.md              # Security considerations and information
 ---
 
 ## Features
 
 1. **Sentiment Analysis**: Classifies reviews into positive, neutral, and negative categories and identifes the spam kind of reviews which helps customers to understand the feedback of the respective dataset they collected. 
-2. **Visualizations**: Provides graphical representation of sentiment distribution (pie and bar charts).
+2. **Visualizations**: Provides graphical representation of sentiment distribution (pie and bar charts) and users can able to download the report.
 3. **Interactive Web Interface**:
    - Home page for file uploads.
    - Detailed report page.
-   - Admin page for managing user contact messages.
-4. **Contact Form**: Users can send feedback, which is stored in a database.
-5. **Admin Access**: Admin can view and delete user-submitted contact messages.
+   - Admin page for managing user contact messages and replying to their queries.
+4. **Contact Form**: Users can send feedback, complaints, queries, which is stored in a database.
+5. **Admin Access**: Admin can view, reply, and delete user-submitted contact messages.
 6. **Scalability**: Built with Flask, making it extendable for additional features.
 
 ---
@@ -68,30 +92,34 @@ Install the required Python libraries using the `requirements.txt` file:
 ```bash
 pip install -r requirements.txt
 ```
-
+IMPORTANT: IF SOME PACKAGES DONT GET INSTALLED,
+           USE pip install -r requirements(v).txt (Only incase if it fails...)
 ---
 
 ## About the Libraries
 
-1.Flask: For creating the web application.
-2.nltk: For natural language processing (tokenization, stopword removal, etc.).
-3.textblob: For sentiment analysis.
-4.joblib: For saving and loading models.
-5.pandas: For data manipulation and analysis.
-6.scikit-learn: For machine learning model training, evaluation, and feature extraction.
-7.matplotlib: For plotting graphs.
-8.seaborn: For enhanced data visualization.
-9.plotly: For interactive visualizations.
-10.sqlalchemy: For interacting with the SQLite database.
-11.flask-sqlalchemy: For integrating SQLAlchemy with Flask.
-
+1.  Flask: Web framework for your project.
+2.  Flask-SQLAlchemy: For managing your database connections and models.
+3.  matplotlib: Used for creating plots/graphs.
+4.  wordcloud: Generates word clouds.
+5.  pandas: Data manipulation and analysis.
+6.  numpy: Provides numerical operations, often required by scikit-learn and pandas.
+7.  scikit-learn: For machine learning (classification, TF-IDF, etc.).
+8.  textblob: Sentiment analysis and text processing.
+9.  nltk: Natural Language Toolkit for text processing.
+10. joblib: Model serialization/deserialization.
+11. python-dotenv: To load environment variables from .env files.
+12. pytz: Timezone support.
 ---
 
 ## Frontend - Backend
 
-Frontend - HTML/CSS/JS(for some loading screen effects)
+Frontend - /HTML(For structuring the web pages)
+           /CSS(For styling and making the design visually appealing)
+           /JS(for some loading screen effects)
 
-Backend - Python Flask(main backend framework), Python SQLalchemy(for database)
+Backend - Python Flask(main backend framework)
+          Python SQLalchemy(for database)
 
 Software - VS Code
 
@@ -124,11 +152,11 @@ Software - VS Code
 1. **Homepage**:
    Upload files and navigate to other sections.
 2. **Contact Page**:
-   Submit your feedback.
+   Submit your feedback/Complaints/Queries,etc.
 3. **Report Page**:
-   View analysis results and visualizations.
+   View analysis results and visualizations. Download the report.
 4. **Admin Page**:
-   Manage contact messages.
+   Manage contact messages and take necessary action for people
 
 ---
 
