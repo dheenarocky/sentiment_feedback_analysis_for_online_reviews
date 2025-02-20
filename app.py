@@ -205,7 +205,7 @@ def admin_login():
         username = request.form.get('username')
         password = request.form.get('password')
         # Implement authentication logic here
-        if username == 'dheena' and password == 'frd1541':  # Example credentials
+        if username == os.getenv("uname") and password == os.getenv("apwd"):  
             session['admin_logged_in'] = True
             return redirect(url_for('view_messages'))  # Redirect to a secure admin page or home
         flash('Invalid credentials🚫, please try again.☹️', 'error')
