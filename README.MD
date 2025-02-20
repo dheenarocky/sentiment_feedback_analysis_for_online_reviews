@@ -92,7 +92,7 @@ Install the required Python libraries using the `requirements.txt` file:
 ```bash
 pip install -r requirements.txt
 ```
-IMPORTANT: IF SOME PACKAGES DONT GET INSTALLED,
+IMPORTANT: IF SOME PACKAGES DONT GET INSTALLED DUE TO COMPATIBLE ISSUE,
            USE pip install -r requirements(v).txt (Only incase if it fails...)
 ---
 
