@@ -52,6 +52,7 @@
         .nav-bar a:hover {
             text-decoration: underline;
             color: #ffcc33;
+            text-shadow: 2px 2px 20px rgba(226, 229, 8, 0.753);
         }
 
         .container {
@@ -80,6 +81,7 @@
             font-size: 2.2em;
             color: #ffd700;
             text-transform: uppercase;
+            text-shadow: 2px 2px 20px rgba(226, 229, 8, 0.753);
         }
 
         form {
@@ -121,8 +123,13 @@
             transition: background-color 0.3s, transform 0.2s;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .btn-submit:hover {
+            background-color: #00b336;
+            transform: scale(1.05);
+        }
+
+        .btn-clear:hover {
+            background-color: #ff0000;
             transform: scale(1.05);
         }
 
@@ -180,7 +187,8 @@
                 <label for="message">Your Message</label>
                 <textarea id="message" name="message" rows="5" placeholder="Enter your message" required></textarea>
 
-                <button type="submit">Send Message</button>
+                <button type="submit" class="btn-submit">Send Message</button>
+                <button type="button" id="clearButton" class="btn-clear">Clear</button>
             </form>
             <a href="{{ url_for('index') }}" class="back-link">Back to Home</a>
             <footer>
@@ -191,7 +199,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const content = document.querySelector('.content');
-
+            const clearButton = document.getElementById('clearButton');
+            clearButton.addEventListener('click', function () {
+                document.querySelector('form').reset();
+            });
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {

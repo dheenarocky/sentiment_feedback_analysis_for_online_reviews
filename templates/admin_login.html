@@ -52,6 +52,7 @@
         .nav-bar a:hover {
             text-decoration: underline;
             color: #ffcc33;
+            text-shadow: 2px 2px 20px rgba(226, 229, 8, 0.753);
         }
 
         .login-container {
@@ -83,7 +84,7 @@
 
         input[type="text"],
         input[type="password"] {
-            width: 100%;
+            width: 85%;
             padding: 12px;
             margin: 15px 0;
             border: none;
@@ -95,11 +96,11 @@
 
         input:focus {
             outline: none;
-            box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+            box-shadow: 0 0 5px rgba(254, 220, 0, 0.7);
         }
 
         button {
-            width: 100%;
+            width: 55%;
             padding: 12px;
             margin: 15px 0;
             border: none;
@@ -111,8 +112,13 @@
             transition: background-color 0.3s, transform 0.2s;
         }
 
-        button:hover {
-            background-color: #0056b3;
+        .btn-submit:hover {
+            background-color: #00b336;
+            transform: scale(1.05);
+        }
+
+        .btn-clear:hover {
+            background-color: #ff0000;
             transform: scale(1.05);
         }
 
@@ -138,6 +144,14 @@
             background-color: #0056b3;
             transform: scale(1.05);
         }
+        .button-container {
+            display: flex;
+            justify-content: center; 
+            gap: 20px; 
+            width: 100%; 
+            justify-content: center; 
+        }
+
     </style>
 </head>
 
@@ -169,7 +183,10 @@
             <form method="POST">
                 <input type="text" name="username" placeholder="Enter Admin Username" required>
                 <input type="password" name="password" placeholder="Enter Admin Password" required>
-                <button type="submit">Login</button>
+                <div class="button-container">
+                <button type="submit" class="btn-submit">Login</button>
+                <button type="button" id="clearButton" class="btn-clear">Clear</button>
+                </div>
             </form>
             <!-- Back to Home Link -->
             <a href="{{ url_for('index') }}" class="btn-back">Back to Home</a>
@@ -181,7 +198,10 @@
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const content = document.querySelector('.content');
-
+            const clearButton = document.getElementById('clearButton');
+            clearButton.addEventListener('click', function () {
+                document.querySelector('form').reset();
+            });
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
