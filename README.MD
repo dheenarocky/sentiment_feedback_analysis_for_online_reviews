@@ -60,10 +60,10 @@ sentiment_feedback_analysis/
 │
 ├── uploads/                 # Directory for uploaded files
 │
-├── .env                     # Environment variable configurations
+├── .env                     # Environment variable configurations (Make yourself)
 ├── .gitattributes           # Git attribute settings
-├── .gitignore               # Files to ignore in Git
-├── addon.txt
+├── .gitignore               # Files to ignore in Git(.env won't available for security reasons)
+├── addon.txt                # Addtional things for note
 ├── app.py                   # Main script to run the Flask application
 ├── models.py                # Creating a database
 ├── README.md                # Project description
@@ -95,6 +95,7 @@ pip install -r requirements.txt
 ```
 IMPORTANT: IF SOME PACKAGES DONT GET INSTALLED DUE TO COMPATIBLE ISSUE,
            USE pip install -r requirements(v).txt (Only incase if it fails...)
+           IF STILL FAILS, CHECK THE RIGHT COMAPTIBLE VERSION FOR YOUR SYSTEM AND INSTALL THEM.
 ---
 
 ## About the Libraries
@@ -133,17 +134,26 @@ Software - VS Code
    cd sentiment_feedback_analysis_for_online_reviews
    ```
 
-2. **Set Up the Database**:
+2. **Set Up the Migration to manage database**:
+   ```bash
+   flask db init
+   flask db migrate -m "Initial migration"
+   ```
+
+3. **Set Up the Database**:
    ```bash
    flask db upgrade
    ```
+   {
+      Make sure that Flask-Migrate is properly initialized for performing this command
+   }
 
-3. **Run the Application**:
+4. **Run the Application**:
    ```bash
    python app.py
    ```
 
-4. **Access the Application**:
+5. **Access the Application**:
    Open your browser and go to `http://127.0.0.1:5000`.
 
 ---

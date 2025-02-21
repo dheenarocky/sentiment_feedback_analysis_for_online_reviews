@@ -14,6 +14,7 @@ import smtplib
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from sklearn.feature_extraction.text import TfidfVectorizer
+from flask_migrate import Migrate
 from dotenv import load_dotenv
 
 app = Flask(__name__)
@@ -22,6 +23,8 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///contact_messages.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db.init_app(app)  # Initialize `db` with the Flask app
+
+migrate = Migrate(app, db) # Initialize `migrate` with the Flask app and `db`
 
 # Create the database tables (only once during setup)
 with app.app_context():
