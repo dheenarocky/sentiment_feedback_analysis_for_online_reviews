@@ -13,6 +13,7 @@ sentiment_feedback_analysis/
 │
 ├── _pycache__/             # Compiled Python files (ignored in production)
 │   └── models.cpython-313.pyc
+│   └── app.cpython-313.pyc
 │
 ├── .github/
 │   └── dependabot.yml       # GitHub Dependabot configuration
@@ -20,6 +21,8 @@ sentiment_feedback_analysis/
 ├── data/                    # Folder for storing datasets
 │
 ├── instance/                # Flask instance folder for configurations
+│
+├── migrations/              # Folder for database migrations
 │
 ├── models/                  # Folder for machine learning models
 │   ├── fraud_detection_model1.pkl
@@ -53,12 +56,11 @@ sentiment_feedback_analysis/
 │   ├── contact_success.html
 │   ├── contact.html
 │   ├── email_success.html
-    ├──email_failed.html
+    ├── email_failed.html
 │   ├── email.html
 │   ├── index.html
 │   └── view_messages.html
 │
-├── uploads/                 # Directory for uploaded files
 │
 ├── .env                     # Environment variable configurations (Make yourself)
 ├── .gitattributes           # Git attribute settings
@@ -124,7 +126,7 @@ Backend - Python Flask(main backend framework)
           Python SQLalchemy(for database)
 
 Software - VS Code
-
+---
 
 ## How to Run the Project
 
@@ -168,6 +170,34 @@ Software - VS Code
    View analysis results and visualizations. Download the report.
 4. **Admin Page**:
    Manage contact messages and take necessary action for people
+
+---
+
+## Hardware and Software Requirements
+
+ **Hardware Requirements:**
+
+*💻 Minimum Requirements (For Development & Testing):*
+Processor: Intel Core i3 (8th Gen) or AMD Ryzen 3
+RAM: 8GB
+Storage: 256GB SSD or HDD
+GPU: Integrated Graphics (Intel UHD or equivalent)
+Internet Connection: Required for package installation, dataset fetching, sending emails
+
+*🚀 Recommended Requirements (For Faster Training & Deployment):*
+Processor: Intel Core i5/i7 (10th Gen+) or AMD Ryzen 5/7
+RAM: 16GB or higher (for handling large datasets)
+Storage: 512GB SSD (faster read/write speeds)
+GPU: NVIDIA GTX 1650+ or RTX 3050+ (for possible deep learning extensions)
+
+ **Software Requirements:**
+
+*✅ Operating System:*
+Windows 10/11 (64-bit)
+*✅ Programming Language & Environment:*
+Python 3.8+
+VS Code / PyCharm / Jupyter Notebook
+*✅ Required Libraries (Saved in requirements.txt)*
 
 ---
 
