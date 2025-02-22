@@ -153,9 +153,20 @@
             background-color: #046464;
         }
 
-        .solved {
-            background-color: #fce300aa !important;
+        .btn-revert {
+            color: white;
+            background-color: #ff8c00;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            font-size: 1em;
         }
+
+        .btn-revert:hover {
+            background-color: #e07b00;
+        }
+
     </style>
     <script>
          window.onload = function() {
@@ -168,18 +179,65 @@
         }
 
         function markAsSolved(row, messageId) {
-            // Add the 'solved' class to the row
-            row.classList.add('solved');
-
-            // You can add an AJAX request here to update the message status in the database.
-            // Example: 
-            // fetch(`/mark_solved/${messageId}`, { method: 'POST' });
-
-            // For now, just change the button to "Solved"
-            const solvedButton = row.querySelector('.btn-solved');
+    fetch(`/mark_replied/${messageId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const actionsCell = row.querySelector('td:last-child'); // Get correct column
+            const solvedButton = actionsCell.querySelector('.btn-solved');
+            
             solvedButton.textContent = 'Replied ✔';
-            solvedButton.disabled = true;  
+            solvedButton.disabled = true;
+
+            // Remove any existing revert button to prevent duplication
+            const existingRevertButton = actionsCell.querySelector('.btn-revert');
+            if (existingRevertButton) existingRevertButton.remove();
+
+            // Create and add the revert button
+            const revertButton = document.createElement('button');
+            revertButton.classList.add('btn-revert');
+            revertButton.textContent = 'Revert';
+            revertButton.onclick = function () {
+                revertSolved(row, messageId);
+            };
+
+            // Append the revert button **correctly** right after the "Replied" button
+            solvedButton.insertAdjacentElement('afterend', revertButton);
         }
+    })
+    .catch(error => console.error("Error updating status:", error));
+}
+
+function revertSolved(row, messageId) {
+    fetch(`/revert_replied/${messageId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' }
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            const actionsCell = row.querySelector('td:last-child');
+            const solvedButton = actionsCell.querySelector('.btn-solved');
+
+            solvedButton.textContent = 'Mark as Replied';
+            solvedButton.disabled = false;
+
+            // Remove the revert button correctly
+            const revertButton = actionsCell.querySelector('.btn-revert');
+            if (revertButton) revertButton.remove();
+
+            // Ensure the "Mark as Replied" button works again
+            solvedButton.onclick = function () {
+                markAsSolved(row, messageId);
+            };
+        }
+    })
+    .catch(error => console.error("Error reverting status:", error));
+}
+
     </script>
 </head>
 
@@ -208,13 +266,23 @@
                     <td>{{ msg.message }}</td>
                     <td>{{ msg.timestamp_ist }}</td>
                     <td>
-                        <button class="btn-reply" onclick="redirectToEmail('{{ msg.email }}')">Reply&nbsp</button>
+                        <button class="btn-reply" onclick="redirectToEmail('{{ msg.email }}')">Reply</button>
+                        
                         <form action="/delete_message/{{ msg.id }}" method="POST" style="display:inline;"
                             onsubmit="return confirm('Are you sure you want to delete this message?');">
                             <button type="submit" class="btn-delete">Delete</button>
                         </form>
-                        <button class="btn-solved" onclick="markAsSolved(this.closest('tr'), {{ msg.id }})">Mark as Replied</button>
+                    
+                        {% if msg.status == 'Replied' %}
+                            <button class="btn-solved" disabled>Replied ✔</button>
+                            <button class="btn-revert" onclick="revertSolved(this.closest('tr'), '{{ msg.id }}')">Revert</button>
+                        {% else %}
+                            <button class="btn-solved" onclick="markAsSolved(this.closest('tr'), '{{ msg.id }}')">Mark as Replied</button>
+                        {% endif %}
                     </td>
+                    
+                    
+                    
                 </tr>
                 {% endfor %}
             </tbody>

@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template, redirect, url_for, flash, session
+from flask import Flask, request, render_template, redirect, url_for, flash, session, jsonify
 from matplotlib import pyplot as plt
 import matplotlib
 matplotlib.use('Agg')
@@ -265,6 +265,21 @@ def send_email(recipient, subject, body):
 @app.route('/email_success', methods=['GET'])
 def email_success():
     return render_template('email_success.html')
+
+@app.route('/mark_replied/<int:message_id>', methods=['POST'])
+def mark_replied(message_id):
+    message = ContactMessage.query.get_or_404(message_id)
+    message.status = "Replied"
+    db.session.commit()
+    return jsonify({"success": True, "message": "Message marked as replied!"})
+
+
+@app.route('/revert_replied/<int:message_id>', methods=['POST'])
+def revert_replied(message_id):
+    message = ContactMessage.query.get_or_404(message_id)
+    message.status = "Pending"  # Change status back
+    db.session.commit()
+    return jsonify({"success": True, "message": "Message reverted to pending!"})
 
 if __name__ == '__main__':
     app.run(debug=True)
