@@ -56,16 +56,15 @@ sentiment_feedback_analysis/
 │   ├── contact_success.html
 │   ├── contact.html
 │   ├── email_success.html
-    ├── email_failed.html
+│   ├── email_failed.html
 │   ├── email.html
 │   ├── index.html
 │   └── view_messages.html
 │
-│
 ├── .env                     # Environment variable configurations (Make yourself)
 ├── .gitattributes           # Git attribute settings
 ├── .gitignore               # Files to ignore in Git(.env won't available for security reasons)
-├── addon.txt                # Addtional things for note
+├── addon.txt                # Additional things for note
 ├── app.py                   # Main script to run the Flask application
 ├── models.py                # Creating a database
 ├── README.md                # Project description
@@ -76,13 +75,13 @@ sentiment_feedback_analysis/
 
 ## Features
 
-1. **Sentiment Analysis**: Classifies reviews into positive, neutral, and negative categories and identifes the spam kind of reviews which helps customers to understand the feedback of the respective dataset they collected. 
-2. **Visualizations**: Provides graphical representation of sentiment distribution (pie and bar charts) and users can able to download the report.
+1. **Sentiment Analysis**: Classifies reviews into positive, neutral, and negative categories and identifies spam reviews, helping customers understand feedback.
+2. **Visualizations**: Provides graphical representation of sentiment distribution (pie and bar charts), and users can download the report.
 3. **Interactive Web Interface**:
    - Home page for file uploads.
    - Detailed report page.
    - Admin page for managing user contact messages and replying to their queries.
-4. **Contact Form**: Users can send feedback, complaints, queries, which is stored in a database.
+4. **Contact Form**: Users can send feedback, complaints, and queries, which are stored in a database.
 5. **Admin Access**: Admin can view, reply, and delete user-submitted contact messages.
 6. **Scalability**: Built with Flask, making it extendable for additional features.
 
@@ -95,37 +94,47 @@ Install the required Python libraries using the `requirements.txt` file:
 ```bash
 pip install -r requirements.txt
 ```
-IMPORTANT: IF SOME PACKAGES DONT GET INSTALLED DUE TO COMPATIBLE ISSUE,
-           USE pip install -r requirements(v).txt (Only incase if it fails...)
-           IF STILL FAILS, CHECK THE RIGHT COMAPTIBLE VERSION FOR YOUR SYSTEM AND INSTALL THEM.
+
+If some packages fail due to compatibility issues, try:
+
+```bash
+pip install -r requirements(v).txt
+```
+
+If it still fails, check for the right compatible version for your system and install manually.
+
 ---
 
 ## About the Libraries
 
-1.  Flask: Web framework for your project.
-2.  Flask-SQLAlchemy: For managing your database connections and models.
-3.  matplotlib: Used for creating plots/graphs.
+1.  Flask: Web framework for the project.
+2.  Flask-SQLAlchemy: Manages database connections and models.
+3.  matplotlib: Creates plots/graphs.
 4.  wordcloud: Generates word clouds.
 5.  pandas: Data manipulation and analysis.
-6.  numpy: Provides numerical operations, often required by scikit-learn and pandas.
-7.  scikit-learn: For machine learning (classification, TF-IDF, etc.).
+6.  numpy: Numerical operations.
+7.  scikit-learn: Machine learning (classification, TF-IDF, etc.).
 8.  textblob: Sentiment analysis and text processing.
 9.  nltk: Natural Language Toolkit for text processing.
 10. joblib: Model serialization/deserialization.
-11. python-dotenv: To load environment variables from .env files.
+11. python-dotenv: Loads environment variables from .env files.
 12. pytz: Timezone support.
+
 ---
 
 ## Frontend - Backend
 
-Frontend - /HTML(For structuring the web pages)
-           /CSS(For styling and making the design visually appealing)
-           /JS(for some loading screen effects)
+**Frontend**:  
+- HTML (for structuring web pages)  
+- CSS (for styling and design)  
+- JavaScript (for animations and loading effects)  
 
-Backend - Python Flask(main backend framework)
-          Python SQLalchemy(for database)
+**Backend**:  
+- Python Flask (main backend framework)  
+- SQLAlchemy (for database management)  
 
-Software - VS Code
+**Software**: VS Code
+
 ---
 
 ## How to Run the Project
@@ -146,9 +155,8 @@ Software - VS Code
    ```bash
    flask db upgrade
    ```
-   {
-      Make sure that Flask-Migrate is properly initialized for performing this command
-   }
+
+   Ensure Flask-Migrate is properly initialized before running this command.
 
 4. **Run the Application**:
    ```bash
@@ -162,42 +170,36 @@ Software - VS Code
 
 ## Screenshots
 
-1. **Homepage**:
-   Upload files and navigate to other sections.
-2. **Contact Page**:
-   Submit your feedback/Complaints/Queries,etc.
-3. **Report Page**:
-   View analysis results and visualizations. Download the report.
-4. **Admin Page**:
-   Manage contact messages and take necessary action for people
+1. **Homepage**: Upload files and navigate to other sections.
+2. **Contact Page**: Submit feedback, complaints, or queries.
+3. **Report Page**: View analysis results and visualizations. Download reports.
+4. **Admin Page**: Manage contact messages and take necessary actions.
 
 ---
 
 ## Hardware and Software Requirements
 
- **Hardware Requirements:**
+### Hardware Requirements
 
-*💻 Minimum Requirements (For Development & Testing):*
-Processor: Intel Core i3 (8th Gen) or AMD Ryzen 3
-RAM: 8GB
-Storage: 256GB SSD or HDD
-GPU: Integrated Graphics (Intel UHD or equivalent)
-Internet Connection: Required for package installation, dataset fetching, sending emails
+**Minimum Requirements (For Development & Testing):**  
+- Processor: Intel Core i3 (8th Gen) or AMD Ryzen 3  
+- RAM: 8GB  
+- Storage: 256GB SSD or HDD  
+- GPU: Integrated Graphics (Intel UHD or equivalent)  
+- Internet Connection: Required for package installation, dataset fetching, and sending emails  
 
-*🚀 Recommended Requirements (For Faster Training & Deployment):*
-Processor: Intel Core i5/i7 (10th Gen+) or AMD Ryzen 5/7
-RAM: 16GB or higher (for handling large datasets)
-Storage: 512GB SSD (faster read/write speeds)
-GPU: NVIDIA GTX 1650+ or RTX 3050+ (for possible deep learning extensions)
+**Recommended Requirements (For Faster Training & Deployment):**  
+- Processor: Intel Core i5/i7 (10th Gen+) or AMD Ryzen 5/7  
+- RAM: 16GB or higher (for handling large datasets)  
+- Storage: 512GB SSD (faster read/write speeds)  
+- GPU: NVIDIA GTX 1650+ or RTX 3050+ (for possible deep learning extensions)  
 
- **Software Requirements:**
+### Software Requirements
 
-*✅ Operating System:*
-Windows 10/11 (64-bit)
-*✅ Programming Language & Environment:*
-Python 3.8+
-VS Code / PyCharm / Jupyter Notebook
-*✅ Required Libraries (Saved in requirements.txt)*
+- **Operating System**: Windows 10/11 (64-bit)  
+- **Programming Language & Environment**: Python 3.8+  
+- **IDE**: VS Code / PyCharm / Jupyter Notebook  
+- **Required Libraries**: Installed via `requirements.txt`  
 
 ---
 
@@ -219,4 +221,3 @@ This project is licensed under the MIT License.
 ## Contact
 
 For any queries or contributions, please reach out to www.dheenarockstar@gmail.com.
-
