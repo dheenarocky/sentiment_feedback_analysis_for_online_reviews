@@ -1,7 +1,8 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
+import sys
+import os
 # Load the cleaned dataset
 data = pd.read_csv('data/cleaned_reviews.csv')
 
